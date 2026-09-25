@@ -5,7 +5,12 @@ import { fileURLToPath } from "node:url";
  * Плагин: импортирует .svg как строку с его содержимым.
  * Пример использования:
  *   import logo from './logo.svg';
- *   document.body.insertAdjacentHTML('beforeend', logo);
+ *   document.body.insertAdjacentHTML('beforeend', logo); 
+ * 
+ *   insertAdjacentHTML — встроенный метод JavaScript
+ *   в DOM, который позволяет вставлять произвольный HTML-код
+ *   в указанное место относительно выбранного элемента,
+ *   пишется в формате element.insertAdjacentHTML(position, text);
  */
 export default function svgInlinePlugin() {
   // Регулярка для отсечения query-суффиксов Vite (?import, ?t=...)
@@ -19,7 +24,7 @@ export default function svgInlinePlugin() {
     async load(id) {
       // id в dev может быть "/src/logo.svg", а в build — абсолютный путь
       const [cleanId] = id.split("?");
-      if (!svgRE.test(cleanId)) return null; // null = "я не берусь, иди дальше"
+      if (!svgRE.test(cleanId)) return null; // null = «я не берусь, иди дальше»
 
       // В dev и build id может быть как файловым путём, так и URL-путём.
       const isFsPath = cleanId.startsWith("/") || /^[a-zA-Z]:/.test(cleanId);
